@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 const App = () => {
   const [todos, setTodos] = useState([
-    { id: 1, title: 'Udemy視聴React学習' },
-    { id: 2, title: 'ReactTODOリストアイデア思案' },
-    { id: 3, title: '8月プログラミング学習スケジュール確認' }
+    // { id: 1, title: 'Udemy視聴React学習' },
+    // { id: 2, title: 'ReactTODOリストアイデア思案' },
+    // { id: 3, title: '8月プログラミング学習スケジュール確認' }
   ])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
