@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import './styles.css';
 
 const App = () => {
   const [todos, setTodos] = useState([
@@ -88,19 +89,23 @@ const App = () => {
               label="新しいタイトル"
               value={newTitle}
               onChange={handleEditFormChange}
+              className='editform'
             />
-            <button onClick={handleEditTodo}>編集を保存</button>
+            <button onClick={handleEditTodo}>←編集し保存</button>
             <button onClick={handleCloseEditForm}>キャンセル</button>
           </div>
         ) : (
-          <div>
+          <div className='todofilter'>
             <input
               type="text"
               label="タイトル"
               value={todoTitle}
               onChange={handleAddFormChanges}
+              className='todo'
+              placeholder="ここにTODOを入力し作成ボタンを押してください"
             />
             <button onClick={handleAddTodo}>作成</button>
+            <br />
             <select value={filter} onChange={(e) => setFilter(e.target.value)}>
               <option value='all'>すべて</option>
               <option value='notStarted'>未着手</option>
@@ -109,7 +114,7 @@ const App = () => {
             </select>
           </div>
         )}
-        <ul>
+        <ul className='todolist'>
           {filteredTodos.map((todo) => (
             <li key={todo.id}>
               <span>{todo.title}</span>

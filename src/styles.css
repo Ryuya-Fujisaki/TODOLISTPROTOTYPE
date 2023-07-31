@@ -1,0 +1,66 @@
+body {
+    background-color: #ffefca;
+}
+
+.todo {
+    width: 780px;
+    color: #fff;
+    padding: 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #a0cf92;
+}
+
+.todofilter::after {
+    content: "のステータスのTODOを表示";
+    font-size: 12px;
+}
+
+.todolist {
+    width: 840px;
+    border-radius: 6px;
+    list-style-type: decimal;
+    background-color: #ffd77a;
+    color: #1e38a1;
+}
+
+li {
+    padding: 20px 0;
+}
+span {
+    margin: 20px 16px 20px 4px;
+}
+
+.editform {
+    color: #fff;
+    background-color: #a0cf92;
+    padding: 20px;
+    border:none;
+    outline: none;
+    border-radius: 10px;
+}
+
+input {
+    margin: 5px;
+}
+
+button {
+    color: #fff;
+    background-color: gray;
+    border: none;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+select {
+    margin: 5px;
+    /* border: none; */
+    outline: none;
+    border-radius: 4px;
+}
+
+::placeholder {
+    color: #fff;
+}
