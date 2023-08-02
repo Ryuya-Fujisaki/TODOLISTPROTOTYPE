@@ -34,6 +34,7 @@ span {
 }
 
 .editform {
+    width: 640px;
     color: #fff;
     background-color: #a0cf92;
     padding: 20px;
