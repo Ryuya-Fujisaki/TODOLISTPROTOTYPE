@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import './styles.css';
+import TodoArray from './components/TodoArray';
+import InputForm from './components/InputForm';
+import Select from './components/Select';
+import EditForm from './components/EditForm';
 
 const App = () => {
-  const [todos, setTodos] = useState([
-    // { id: 1, title: 'Udemy視聴React学習' },
-    // { id: 2, title: 'ReactTODOリストアイデア思案' },
-    // { id: 3, title: '8月プログラミング学習スケジュール確認' }
-  ])
+  const [todos, setTodos] = useState([])
   const [todoTitle, setTodoTitle] = useState('')
   const [todoId, setTodoId] = useState(todos.length + 1)
   const [isEditable, setIsEditable] = useState(false)
@@ -15,24 +14,6 @@ const App = () => {
   const [newTitle, setNewTitle] = useState('')
   const [filter, setFilter] = useState('notStarted')
   const [filteredTodos, setFilteredTodos] = useState([])
-
-  const handleAddFormChanges = (e) => { setTodoTitle(e.target.value) }
-
-  const handleAddTodo = () => {
-    setTodos([...todos, { id: todoId, title: todoTitle, status: "notStarted" }])
-    setTodoId(todoId + 1)
-    setTodoTitle('')
-  }
-
-  const handleDeleteTodo = (targetTodo) => {
-    setTodos(todos.filter((todo) => todo !== targetTodo))
-  }
-
-  const handleOpenEditForm = (todo) => {
-    setIsEditable(true)
-    setEditId(todo.id)
-    setNewTitle(todo.title)
-  }
 
   const handleEditFormChange = (e) => {
     setNewTitle(e.target.value)
@@ -50,14 +31,6 @@ const App = () => {
     setEditId('')
     setNewTitle('')
     handleCloseEditForm('')
-  }
-
-  const handleStatusChange = (targetTodo, e) => {
-    console.log(targetTodo)
-
-    const newArray = todos.map((todo) => todo.id === targetTodo.id ? { ...todo, status: e.target.value } : todo
-    )
-    setTodos(newArray)
   }
 
   useEffect(() => {
@@ -83,54 +56,34 @@ const App = () => {
     <>
       <div className="App">
         {isEditable ? (
-          <div>
-            <input
-              type="text"
-              label="新しいタイトル"
-              value={newTitle}
-              onChange={handleEditFormChange}
-              className='editform'
-            />
-            <button onClick={handleEditTodo}>←編集し保存</button>
-            <button onClick={handleCloseEditForm}>キャンセル</button>
-          </div>
+          <EditForm
+            newTitle={newTitle}
+            handleEditFormChange={handleEditFormChange}
+            handleEditTodo={handleEditTodo}
+            handleCloseEditForm={handleCloseEditForm}
+          />
         ) : (
-          <div className='todofilter'>
-            <input
-              type="text"
-              label="タイトル"
-              value={todoTitle}
-              onChange={handleAddFormChanges}
-              className='todo'
-              placeholder="ここにTODOを入力し作成ボタンを押してください"
+          <div>
+            <InputForm
+              todos={todos}
+              setTodos={setTodos}
+              todoId={todoId}
+              setTodoId={setTodoId}
+              todoTitle={todoTitle}
+              setTodoTitle={setTodoTitle}
             />
-            <button onClick={handleAddTodo}>作成</button>
             <br />
-            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-              <option value='all'>すべて</option>
-              <option value='notStarted'>未着手</option>
-              <option value='inProgress'>作業中</option>
-              <option value='done'>完了</option>
-            </select>
+            <Select filter={filter} setFilter={setFilter} />
           </div>
         )}
-        <ul className='todolist'>
-          {filteredTodos.map((todo) => (
-            <li key={todo.id}>
-              <span>{todo.title}</span>
-              <select
-                value={todo.status}
-                onChange={(e) => handleStatusChange(todo, e)}
-              >
-                <option value="notStarted">未着手</option>
-                <option value="inProgress">作業中</option>
-                <option value="done">完了</option>
-              </select>
-              <button onClick={() => { handleOpenEditForm(todo) }}>編集</button>
-              <button onClick={() => { handleDeleteTodo(todo) }}>削除</button>
-            </li>
-          ))}
-        </ul>
+        <TodoArray
+          todos={todos}
+          setTodos={setTodos}
+          setIsEditable={setIsEditable}
+          setEditId={setEditId}
+          setNewTitle={setNewTitle}
+          filteredTodos={filteredTodos}
+        />
       </div>
     </>
   );
