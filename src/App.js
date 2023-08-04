@@ -55,7 +55,11 @@ const App = () => {
   return (
     <>
       <div className="App">
+        {/* 三項演算子により、ステートisEditableがtrueなら、EditFormコンポーネント（編集要素）を出力し、
+        falseなら、InputFormコンポーネント（入力要素）とSelectコンポーネント（todoステータスのプルダウンリスト）を出力する
+        ことを定義。 */}
         {isEditable ? (
+          // {/* InputFormコンポーネント（todo入力とstate更新）を出力。AppからInputFormに渡すステートと関数を定義。*/}
           <EditForm
             newTitle={newTitle}
             handleEditFormChange={handleEditFormChange}
@@ -64,6 +68,7 @@ const App = () => {
           />
         ) : (
           <div>
+            {/* InputFormコンポーネント（todo入力とstate更新）を出力。AppからInputFormに渡すステートと関数を定義。 */}
             <InputForm
               todos={todos}
               setTodos={setTodos}
@@ -73,9 +78,11 @@ const App = () => {
               setTodoTitle={setTodoTitle}
             />
             <br />
+            {/* Selectコンポーネント（todoステータスのプルダウンリスト）を出力。AppからSelectに渡すステートと関数を定義。 */}
             <Select filter={filter} setFilter={setFilter} />
           </div>
         )}
+        {/* TodoArrayコンポーネント（todos配列）を出力。AppからTodoArrayに渡すステートと関数を定義。 */}
         <TodoArray
           todos={todos}
           setTodos={setTodos}
